@@ -7,22 +7,16 @@ import {
   TextStyle,
   BackHandler,
   Button,
-  TextInput,
 } from "react-native";
+
 import Card from "../components/Card";
+import Input from "../components/Input";
 
 type HomePageProps = {};
 
-const {
-  container,
-  title,
-  buttonsContainer,
-  button,
-  textInput,
-} = StyleSheet.create<{
+const { container, title, buttonsContainer, button } = StyleSheet.create<{
   container: ViewStyle;
   title: TextStyle;
-  textInput: TextStyle;
   buttonsContainer: ViewStyle;
   button: ViewStyle;
 }>({
@@ -36,17 +30,6 @@ const {
   title: {
     fontSize: 18,
     fontWeight: "bold",
-  },
-
-  textInput: {
-    marginVertical: 20,
-    padding: 15,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#353b48",
-    color: "#2f3640",
-    fontWeight: "500",
-    fontSize: 20,
   },
 
   buttonsContainer: {
@@ -69,19 +52,17 @@ const Home: React.FC<HomePageProps> = () => {
       <Text style={title}>Guess the right number !!</Text>
       <Card>
         <Text>Enter a number to get started</Text>
-        <TextInput
-          style={textInput}
+        <Input
+          maxLength={2}
+          autoCorrect={false}
+          autoCapitalize="none"
           onChange={handleChange}
           textContentType="telephoneNumber"
-          keyboardType="numeric"
+          keyboardType="number-pad"
         />
         <View style={buttonsContainer}>
           <View style={button}>
-            <Button
-              title="RESET NUMBER"
-              onPress={BackHandler.exitApp}
-              color="red"
-            />
+            <Button title="RESET NUMBER" onPress={console.log} color="red" />
           </View>
           <View style={button}>
             <Button title="START GAME" onPress={console.log} />
