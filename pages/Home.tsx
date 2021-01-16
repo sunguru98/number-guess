@@ -89,7 +89,11 @@ const Home: React.FC<HomePageProps> = () => {
               />
             </View>
             <View style={button}>
-              <Button title="START GAME" onPress={console.log} />
+              <Button
+                disabled={number === "" || number === "0"}
+                title="START GAME"
+                onPress={console.log}
+              />
             </View>
           </View>
         </Card>
