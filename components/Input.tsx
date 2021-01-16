@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { TextInput, StyleSheet, TextStyle, TextInputProps } from "react-native";
 
 const { input } = StyleSheet.create<{ input: TextStyle }>({
@@ -18,8 +18,10 @@ type InputProps = TextInputProps & {
   style?: TextStyle;
 };
 
-const Input: React.FC<InputProps> = ({ style = {}, ...props }) => {
-  return <TextInput style={{ ...input, ...style }} {...props} />;
-};
+const Input = forwardRef<TextInput, InputProps>(
+  ({ style = {}, ...props }, ref) => {
+    return <TextInput ref={ref} style={{ ...input, ...style }} {...props} />;
+  }
+);
 
 export default Input;
