@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   TextInput,
 } from "react-native";
+import { useAppContext } from "../App.context";
 
 import Card from "../components/Card";
 import Input from "../components/Input";
@@ -49,6 +50,7 @@ const { container, title, buttonsContainer, button } = StyleSheet.create<{
 const Home: React.FC<HomePageProps> = () => {
   const [number, setNumber] = useState<string>("");
   const inputRef = useRef<TextInput | null>(null);
+  const { state, dispatch } = useAppContext();
 
   const handleChange = (enteredNumber: string) => {
     setNumber(enteredNumber.replace(/[^0-9]/g, ""));
@@ -89,7 +91,11 @@ const Home: React.FC<HomePageProps> = () => {
               />
             </View>
             <View style={button}>
-              <Button title="START GAME" onPress={console.log} />
+              <Button
+                disabled={number === "" || number === "0"}
+                title="START GAME"
+                onPress={console.log}
+              />
             </View>
           </View>
         </Card>
