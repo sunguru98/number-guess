@@ -9,6 +9,7 @@ import {
   Button,
   TextInput,
 } from "react-native";
+import Card from "../components/Card";
 
 type HomePageProps = {};
 
@@ -18,11 +19,9 @@ const {
   buttonsContainer,
   button,
   textInput,
-  textInputContainer,
 } = StyleSheet.create<{
   container: ViewStyle;
   title: TextStyle;
-  textInputContainer: ViewStyle;
   textInput: TextStyle;
   buttonsContainer: ViewStyle;
   button: ViewStyle;
@@ -37,13 +36,6 @@ const {
   title: {
     fontSize: 18,
     fontWeight: "bold",
-  },
-
-  textInputContainer: {
-    width: "100%",
-    justifyContent: "space-between",
-    padding: 15,
-    marginTop: 20,
   },
 
   textInput: {
@@ -75,7 +67,7 @@ const Home: React.FC<HomePageProps> = () => {
   return (
     <View style={container}>
       <Text style={title}>Guess the right number !!</Text>
-      <View style={textInputContainer}>
+      <Card>
         <Text>Enter a number to get started</Text>
         <TextInput
           style={textInput}
@@ -86,7 +78,7 @@ const Home: React.FC<HomePageProps> = () => {
         <View style={buttonsContainer}>
           <View style={button}>
             <Button
-              title="QUIT GAME"
+              title="RESET NUMBER"
               onPress={BackHandler.exitApp}
               color="red"
             />
@@ -95,7 +87,7 @@ const Home: React.FC<HomePageProps> = () => {
             <Button title="START GAME" onPress={console.log} />
           </View>
         </View>
-      </View>
+      </Card>
     </View>
   );
 };
