@@ -3,6 +3,7 @@ import { AppActions, AppContextType, AppState } from "./types";
 
 const initialState: AppState = {
   selectedNumber: null,
+  currentGuess: null,
 };
 
 const appReducer = (state: AppState, action: AppActions): AppState => {
@@ -10,6 +11,8 @@ const appReducer = (state: AppState, action: AppActions): AppState => {
   switch (type) {
     case "SET_NUMBER":
       return { ...state, selectedNumber: payload };
+    case "SET_CURRENT_GUESS":
+      return { ...state, currentGuess: payload };
     default:
       return state;
   }

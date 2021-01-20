@@ -1,5 +1,6 @@
 export interface AppState {
   selectedNumber: number | null;
+  currentGuess: number | null;
 }
 
 export interface Action<Type, PayloadType> {
@@ -13,4 +14,5 @@ export type AppContextType = {
 };
 
 type SetNumberAction = Action<"SET_NUMBER", number>;
-export type AppActions = SetNumberAction;
+type SetCurrentGuessAction = Action<"SET_CURRENT_GUESS", number>;
+export type AppActions = SetNumberAction | SetCurrentGuessAction;
