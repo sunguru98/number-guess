@@ -65,6 +65,11 @@ const Home: React.FC<HomePageProps> = () => {
     Keyboard.dismiss();
   };
 
+  const startGame = () => {
+    dispatch({ type: "SET_NUMBER", payload: parseInt(number, 10) });
+    Keyboard.dismiss();
+  };
+
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
       <View style={container}>
@@ -94,7 +99,7 @@ const Home: React.FC<HomePageProps> = () => {
               <Button
                 disabled={number === "" || number === "0"}
                 title="START GAME"
-                onPress={console.log}
+                onPress={startGame}
               />
             </View>
           </View>
