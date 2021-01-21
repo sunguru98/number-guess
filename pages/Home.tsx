@@ -10,17 +10,17 @@ import {
   TouchableWithoutFeedback,
   TextInput,
 } from "react-native";
+import { useAppContext } from "../App.context";
+import ButtonContainer from "../components/ButtonContainer";
 
 import Card from "../components/Card";
 import Input from "../components/Input";
 
 type HomePageProps = {};
 
-const { container, title, buttonsContainer, button } = StyleSheet.create<{
+const { container, title } = StyleSheet.create<{
   container: ViewStyle;
   title: TextStyle;
-  buttonsContainer: ViewStyle;
-  button: ViewStyle;
 }>({
   container: {
     flex: 1,
@@ -33,22 +33,12 @@ const { container, title, buttonsContainer, button } = StyleSheet.create<{
     fontSize: 18,
     fontWeight: "bold",
   },
-
-  buttonsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-
-  button: {
-    flex: 1,
-    marginHorizontal: 10,
-  },
 });
 
 const Home: React.FC<HomePageProps> = () => {
   const [number, setNumber] = useState<string>("");
   const inputRef = useRef<TextInput | null>(null);
+  const { dispatch } = useAppContext();
 
   const handleChange = (enteredNumber: string) => {
     setNumber(enteredNumber.replace(/[^0-9]/g, ""));
@@ -60,6 +50,11 @@ const Home: React.FC<HomePageProps> = () => {
   };
 
   const handlePress = () => {
+    Keyboard.dismiss();
+  };
+
+  const startGame = () => {
+    dispatch({ type: "SET_NUMBER", payload: parseInt(number, 10) });
     Keyboard.dismiss();
   };
 
@@ -79,19 +74,19 @@ const Home: React.FC<HomePageProps> = () => {
             keyboardType="number-pad"
             value={number}
           />
-          <View style={buttonsContainer}>
-            <View style={button}>
-              <Button
-                disabled={number === ""}
-                title="RESET NUMBER"
-                onPress={handleReset}
-                color="red"
-              />
-            </View>
-            <View style={button}>
-              <Button title="START GAME" onPress={console.log} />
-            </View>
-          </View>
+          <ButtonContainer
+            secondary={{
+              disabled: number === "",
+              title: "RESET NUMBER",
+              onPress: handleReset,
+              color: "red",
+            }}
+            primary={{
+              disabled: number === "" || number === "0",
+              title: "START GAME",
+              onPress: startGame,
+            }}
+          />
         </Card>
       </View>
     </TouchableWithoutFeedback>
