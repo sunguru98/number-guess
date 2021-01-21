@@ -38,7 +38,7 @@ const { container, title } = StyleSheet.create<{
 const Home: React.FC<HomePageProps> = () => {
   const [number, setNumber] = useState<string>("");
   const inputRef = useRef<TextInput | null>(null);
-  const { state, dispatch } = useAppContext();
+  const { dispatch } = useAppContext();
 
   const handleChange = (enteredNumber: string) => {
     setNumber(enteredNumber.replace(/[^0-9]/g, ""));

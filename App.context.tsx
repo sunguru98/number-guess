@@ -25,13 +25,15 @@ const AppContext = React.createContext<AppContextType>({
 
 export const useAppContext = () => useContext<AppContextType>(AppContext);
 
-const AppContextProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = useReducer(appReducer, initialState);
-  return (
-    <AppContext.Provider value={{ state, dispatch }}>
-      {children}
-    </AppContext.Provider>
-  );
-};
+function AppContextProvider<T>(WrappedComponent: React.ComponentType<T>) {
+  return (props: T) => {
+    const [state, dispatch] = useReducer(appReducer, initialState);
+    return (
+      <AppContext.Provider value={{ state, dispatch }}>
+        <WrappedComponent {...props} />
+      </AppContext.Provider>
+    );
+  };
+}
 
 export default AppContextProvider;
